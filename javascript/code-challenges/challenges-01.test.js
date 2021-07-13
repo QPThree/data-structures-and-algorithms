@@ -64,12 +64,7 @@ Use `forEach` to build a new array of strings, each string modified by the callb
 
 const greeting = (word) => {
   // Solution code here...
-  let outputWord = '';
-  word.split('').forEach(letter => {
-    letter = letter.toUpperCase();
-    outputWord = outputWord + letter;
-  });
-  outputWord = outputWord + '!';
+  let outputWord = word.toUpperCase() + '!';
   return outputWord;
 };
 
@@ -107,7 +102,7 @@ const addNumbers = (num, arr, times, callback) => {
   // Solution code here...
   while (times > 0){
     callback(arr,num);
-    times = times - 1;
+    times--;
   }
   return arr;
 };
@@ -134,7 +129,7 @@ const createList = (availableItems) => {
   // Solution code here...
   let outputArr = [];
   availableItems.forEach(obj => {
-    if (obj.available === true){
+    if (obj.available){
       outputArr.push(obj.name);
     }
   });
@@ -159,12 +154,15 @@ const fizzbuzz = (arr) => {
   // Solution code here...
   let outputArr = [];
   arr.forEach(number => {
-    if(((number % 3) === 0) && ((number % 5) === 0)){
-      outputArr.push('Fizz Buzz');
+    if((number % 3) === 0){
+      if ((number % 5) === 0){
+        outputArr.push('Fizz Buzz');
+      }
+      else {
+        outputArr.push('Fizz');
+      }
     }
-    else if ((number % 3) === 0){
-      outputArr.push('Fizz');
-    } else if ((number % 5) === 0){
+    else if ((number % 5) === 0){
       outputArr.push('Buzz');
     }
     else {
