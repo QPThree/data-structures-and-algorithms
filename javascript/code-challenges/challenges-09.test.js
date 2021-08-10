@@ -157,8 +157,9 @@ const hasChildrenValues = (arr, character) => {
       return char;
     }
   });
-  let arrToCheck = Object.keys(characterData[0]);
-  return (arrToCheck.includes('children'));
+  let arrToCheck = Object.values(characterData[0]);
+  console.log(typeof arrToCheck[2]);
+  return (typeof arrToCheck[2] === 'object');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -171,6 +172,13 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  let characterData = arr.filter(char => {
+    if (char.name === character){
+      return char;
+    }
+  });
+  let arrToCheck = Object.keys(characterData[0]);
+  return (arrToCheck.includes('children'));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -289,7 +297,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
   });
