@@ -172,13 +172,14 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  // --- Solution works on replit. Not sure the issue here?---
   let characterData = arr.filter(char => {
     if (char.name === character){
       return char;
     }
   });
-  let arrToCheck = Object.keys(characterData[0]);
-  return (arrToCheck.includes('children'));
+  let solution = Object.keys(characterData[0]).includes('children');
+  return solution;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -189,6 +190,24 @@ Write a function named totalCharacters that takes in an array and returns the nu
 
 const totalCharacters = (arr) => {
   // Solution code here...
+  let solutionArr = [];
+  arr.map(obj => {
+    let keyArr = Object.keys(obj).slice(0, -1);
+    keyArr.map(key =>{
+      let localArr = obj[key];
+      if ((typeof localArr) === 'object'){
+        localArr === null ? 0 : localArr.map(val => {
+          if (!solutionArr.includes(val)){
+            solutionArr.push(val);
+          }
+        });
+      }
+      else{
+        solutionArr.push(obj[key]);
+      }
+    });
+  });
+  return solutionArr.length;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -307,7 +326,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return the number of characters in the array', () => {
     expect(totalCharacters(characters)).toStrictEqual(27);
   });
